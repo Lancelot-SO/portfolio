@@ -3,8 +3,22 @@ import "./contact.css"
 import {MdOutlineEmail}from "react-icons/md"
 import {RiMessengerLine}from "react-icons/ri"
 import {BsWhatsapp}from "react-icons/bs"
+import  { useRef } from 'react';
+import emailjs from "@emailjs/browser"
 
 const Contact = () => {
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs.sendForm('service_c57yace', 'template_p0bxhcm', form.current, 'BwhLD7vMqhEFp57Ji')
+
+    e.target.reset()
+     
+
+    
+  };
   return (
     <section id='contact'>
       <h5>Get In Touch</h5>
@@ -16,14 +30,14 @@ const Contact = () => {
             <MdOutlineEmail className='contact__option-icon'/>
             <h4>Email</h4>
             <h5>fsowah001@gmail.com</h5>
-            <a href='mailto:fsowah001@gmail.com' target="_blank" rel="noopener noreferrer">Send a message</a>
+            <a href="mailto:hanisberg19@gmail.com" target="_blank" rel="noopener noreferrer">Send a message</a>
           </article>
 
           <article className="contact__option">
             <RiMessengerLine className='contact__option-icon'/>
             <h4>Messenger</h4>
             <h5>Lancelot Hanisberg</h5>
-            <a href='https://m.me.lancelot.hanisburg/' target="_blank" rel="noopener noreferrer">Send a message</a>
+            <a href='https://m.me/lancelot.hanisburg/' target="_blank" rel="noopener noreferrer">Send a message</a>
           </article>
 
           <article className="contact__option">
@@ -33,7 +47,7 @@ const Contact = () => {
             <a href='https://api.whatsapp.com/send?phone=+233547688218' target="_blank" rel="noopener noreferrer">Send a message</a>
           </article>
         </div>
-        <form action=''>
+        <form ref={form} onSubmit={sendEmail}>
           <input type="text" name='name' placeholder='Your Full Name' required />
           <input type="email" name='email' placeholder='Your Email' />
           <textarea name="message"  rows="7" placeholder="Your Message" required></textarea>
